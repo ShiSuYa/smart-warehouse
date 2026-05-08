@@ -47,12 +47,12 @@ admin / admin
 
 ## Архитектура
 
-'''
+```text
 Producer -> Kafka warehouse-events -> Consumer -> Cassandra
                                       |
                                       v
                               warehouse-events-dlq
-'''
+```
 
 Consumer читает события из topic:
 
