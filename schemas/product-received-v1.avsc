@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "ProductReceived",
+  "namespace": "warehouse.events",
+  "fields": [
+    { "name": "event_id", "type": "string" },
+    { "name": "event_type", "type": "string", "default": "PRODUCT_RECEIVED" },
+    { "name": "product_id", "type": "string" },
+    { "name": "zone_id", "type": "string" },
+    { "name": "quantity", "type": "int" },
+    { "name": "event_timestamp", "type": "string" }
+  ]
+}

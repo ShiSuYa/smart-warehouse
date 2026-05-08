@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: Warehouse Dashboards
+    orgId: 1
+    folder: Smart Warehouse
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

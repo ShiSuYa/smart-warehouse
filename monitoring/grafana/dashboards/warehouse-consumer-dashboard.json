@@ -1,0 +1,80 @@
+{
+    "id": null,
+    "uid": "warehouse-consumer-dashboard",
+    "title": "Smart Warehouse Consumer",
+    "tags": ["warehouse", "kafka", "cassandra"],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "version": 1,
+    "refresh": "5s",
+    "panels": [
+      {
+        "id": 1,
+        "type": "timeseries",
+        "title": "Consumer lag by partition",
+        "gridPos": { "x": 0, "y": 0, "w": 24, "h": 8 },
+        "targets": [
+          {
+            "expr": "consumer_lag",
+            "legendFormat": "partition {{partition}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        }
+      },
+      {
+        "id": 2,
+        "type": "timeseries",
+        "title": "Throughput — events processed per second",
+        "gridPos": { "x": 0, "y": 8, "w": 24, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum(rate(events_processed_total[1m])) by (event_type)",
+            "legendFormat": "{{event_type}}",
+            "refId": "A"
+          }
+        ],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        }
+      },
+      {
+        "id": 3,
+        "type": "timeseries",
+        "title": "Cassandra write errors",
+        "gridPos": { "x": 0, "y": 16, "w": 24, "h": 8 },
+        "targets": [
+          {
+            "expr": "increase(cassandra_write_errors_total[5m])",
+            "legendFormat": "write errors",
+            "refId": "A"
+          }
+        ],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        }
+      },
+      {
+        "id": 4,
+        "type": "timeseries",
+        "title": "Event processing duration p95",
+        "gridPos": { "x": 0, "y": 24, "w": 24, "h": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(event_processing_duration_seconds_bucket[1m])) by (le, event_type))",
+            "legendFormat": "{{event_type}} p95",
+            "refId": "A"
+          }
+        ],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "Prometheus"
+        }
+      }
+    ]
+  }
